@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 50%; margin-bottom: 30px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form input { margin-bottom: 10px; padding: 5px; width: 300px; }
+        form button { padding: 5px 15px; }
+    </style>
+</head>
+<body>
+
+    <h2>Existing Categories</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Slug Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in cate %}
+            <tr>
+                <td>{{ c.category }}</td>
+                <td>{{ c.link }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2">No categories added yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Add New Category</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="category" placeholder="Category Name" required><br>
+        <input type="text" name="link" placeholder="Slug Link (e.g. my-category)" required><br>
+        <button type="submit">Add Category</button>
+    </form>
+
+</body>
+</html>
